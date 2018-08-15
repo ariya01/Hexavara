@@ -54,6 +54,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 if(response.message().equals("OK"))
                 {
+                    PojoLogin pojoLogin = (PojoLogin)response.body();
+                    SessionUser.setToken(pojoLogin.token);
+                    SessionUser.setUsername(pojoLogin.username);
+                    SessionUser.setEmail(pojoLogin.email);
+                    SessionUser.setFullname(pojoLogin.fullname);
+                    SessionUser.setAddress(pojoLogin.address);
+                    String foto ="http://"+pojoLogin.photo.replaceAll("\\\\","");
+                    SessionUser.setPhoto(foto);
                     intent =  new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
