@@ -19,4 +19,9 @@ public class APIService {
     {
         apiInterface.login(username,password).enqueue(callback);
     }
+
+    public void mylist(String auth,Callback callback)
+    {
+        apiInterface.mylist(auth).enqueue(callback);
+    }
 }
