@@ -1,15 +1,26 @@
 package com.example.pentil.hexavara;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username,et_password;
     private Button btn_login;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +39,42 @@ public class LoginActivity extends AppCompatActivity {
                     bool=validasi();
                     if (bool==true)
                     {
+                        login();
                     }
                     break;
             }
         }
     };
+
+    private void login()
+    {
+        APIService apiService = new APIService();
+        apiService.login(et_username.getText().toString(), et_password.getText().toString(), new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if(response.message().equals("OK"))
+                {
+                    intent =  new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    try {
+                        String error = response.errorBody().string();
+                        Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
 
     private boolean validasi()
     {
