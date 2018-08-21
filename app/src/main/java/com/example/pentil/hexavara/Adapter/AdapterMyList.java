@@ -1,4 +1,4 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.pentil.hexavara.Pojo.PojoMylist;
+import com.example.pentil.hexavara.R;
 
 import java.util.List;
 

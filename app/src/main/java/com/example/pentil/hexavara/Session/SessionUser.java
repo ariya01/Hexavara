@@ -1,4 +1,4 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.Session;
 
 /**
  * Created by Pentil on 15/08/2018.

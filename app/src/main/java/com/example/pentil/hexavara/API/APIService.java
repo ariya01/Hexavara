@@ -1,8 +1,11 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.API;
 
 /**
  * Created by Pentil on 15/08/2018.
  */
+import com.example.pentil.hexavara.API.APIClient;
+import com.example.pentil.hexavara.API.APIInterface;
+
 import retrofit2.Callback;
 
 
@@ -11,7 +14,7 @@ public class APIService {
     private APIInterface apiInterface;
     public APIService()
     {
-        apiInterface=APIClient
+        apiInterface= APIClient
                 .builder()
                 .create(APIInterface.class);
     }

@@ -5,52 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.pentil.hexavara.MainActivity"
-    android:orientation="vertical"
+    tools:context="com.example.pentil.hexavara.Activities.MainActivity"
     tools:showIn="@layout/activity_main">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/ic_launcher"
-            android:id="@+id/cir_user"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/nama_lengkap"
-                android:textStyle="bold"
-                android:text="@string/nama_lengkap"
-                android:textColor="@color/colorPrimary"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/username"
-                android:id="@+id/username"
-                android:textColor="@color/colorPrimary"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/email"
-                android:id="@+id/email"
-                android:textColor="@color/colorPrimary"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/alamat"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/alamat"/>
-        </LinearLayout>
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

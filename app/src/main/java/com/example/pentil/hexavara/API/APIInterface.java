@@ -1,6 +1,8 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.API;
 
-import java.util.ArrayList;
+import com.example.pentil.hexavara.Pojo.PojoLogin;
+import com.example.pentil.hexavara.Pojo.PojoMylist;
+
 import java.util.List;
 
 import retrofit2.Call;
