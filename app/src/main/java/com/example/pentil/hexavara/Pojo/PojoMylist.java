@@ -1,4 +1,4 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.Pojo;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,15 +1,21 @@
-package com.example.pentil.hexavara;
+package com.example.pentil.hexavara.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.json.JSONObject;
+import com.example.pentil.hexavara.API.APIService;
+import com.example.pentil.hexavara.Pojo.PojoLogin;
+import com.example.pentil.hexavara.R;
+import com.example.pentil.hexavara.Session.SessionUser;
 
 import java.io.IOException;
 
@@ -19,7 +25,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username,et_password;
-    private Button btn_login;
+    private CardView btn_login;
+    private ProgressDialog progressDialog;
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     bool=validasi();
                     if (bool==true)
                     {
+                        setprogressbar();
                         login();
                     }
                     break;
@@ -55,26 +63,29 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.message().equals("OK"))
                 {
                     PojoLogin pojoLogin = (PojoLogin)response.body();
-                    SessionUser.setToken(pojoLogin.token);
-                    SessionUser.setUsername(pojoLogin.username);
-                    SessionUser.setEmail(pojoLogin.email);
-                    SessionUser.setFullname(pojoLogin.fullname);
-                    SessionUser.setAddress(pojoLogin.address);
-                    String foto ="http://"+pojoLogin.photo.replaceAll("\\\\","");
+                    SessionUser.setToken(pojoLogin.getToken());
+                    SessionUser.setUsername(pojoLogin.getUsername());
+                    SessionUser.setEmail(pojoLogin.getEmail());
+                    SessionUser.setFullname(pojoLogin.getFullname());
+                    SessionUser.setAddress(pojoLogin.getAddress());
+                    String foto ="http://"+pojoLogin.getPhoto().replaceAll("\\\\","");
                     SessionUser.setPhoto(foto);
                     intent =  new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
+                    finish();
+                    hideprogressbar();
                 }
                 else
                 {
                     try {
                         String error = response.errorBody().string();
+                        hideprogressbar();
                         Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
+                        hideprogressbar();
                     }
                 }
-
             }
 
             @Override
@@ -121,6 +132,21 @@ public class LoginActivity extends AppCompatActivity {
     {
         et_username = (EditText)findViewById(R.id.username);
         et_password = (EditText)findViewById(R.id.password);
-        btn_login = (Button)findViewById(R.id.login);
+        btn_login = (CardView) findViewById(R.id.login);
+    }
+
+    private void setprogressbar()
+    {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Authentication");
+        progressDialog.setMessage("Loading");
+        progressDialog.show();
+    }
+
+    private void hideprogressbar()
+    {
+        progressDialog.dismiss();
     }
 }
